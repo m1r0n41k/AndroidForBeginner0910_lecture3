@@ -1,6 +1,7 @@
 package com.drondon;
 
 import com.drondon.user.Admin;
+import com.drondon.user.DefaultUser;
 import com.drondon.user.IUser;
 
 import java.util.ArrayList;
@@ -9,16 +10,22 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static List<IUser> users = new ArrayList<IUser>();
+    private final static List<IUser> users = new ArrayList<>();
 
-    private static String menu = "\n\nДля работы с приложение выберите один из пунктов меню\n\n" +
-            "Меню:" +
-            "1: Войти в системы" +
-            "0: Выход" +
-            "\n";
+    private final static String menu =
+            "\n\nДля работы с приложение выберите один из пунктов меню\n\n" +
+                    "Меню:\n" +
+                    "1: Войти в системы\n" +
+                    "0: Выход\n" +
+                    '\n';
 
     public static void main(String[] args) {
-        users.add(new Admin(getUserProvider()));
+        IUser admin = new Admin(getUserProvider());
+        users.add(admin);
+
+        IUser moderator = new DefaultUser();
+        users.add(moderator);
+
         startApplication();
     }
 
